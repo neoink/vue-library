@@ -1,0 +1,31 @@
+{
+  "name": "@vacalians/test",
+  "version": "0.1.2",
+  "description": "",
+  "license": "MIT",
+  "main": "lib/lib.common.js",
+  "browser": {
+    "./sfc": "src/test.vue"
+  },
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "rollup --config build/rollup.config.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@vue/cli-service": "^3.0.0",
+    "babel-core": "^6.26.3",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "minimist": "^1.2.0",
+    "rollup": "^0.57.1",
+    "rollup-plugin-alias": "^1.4.0",
+    "rollup-plugin-babel": "^3.0.7",
+    "rollup-plugin-uglify-es": "0.0.1",
+    "rollup-plugin-vue": "^3.0.0",
+    "vue": "^2.5.16",
+    "vue-template-compiler": "^2.5.16"
+  }
+}
