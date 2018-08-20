@@ -7,37 +7,28 @@ import alias from 'rollup-plugin-alias';
 import minimist from 'minimist';
 
 const argv = minimist(process.argv.slice(2));
-const componentsFile = require('./../components.json');
+const componentsFile = require('./../components.json'); // Load library DI
 
-const externals = [];
-Object.keys(componentsFile).forEach(function(key) {
-  externals[`vacalians-ui/src/packages/${key}`] = `vacalians-ui/lib/${key}`;
+// Match DI and replace on "lib" entry point
+const DI = Object.keys(componentsFile).map(value => componentsFile[value]);
+const DIObj = {};
+Object.keys(componentsFile).forEach(value => {
+  const splitDI = componentsFile[value].split('/');
+  DIObj[componentsFile[value]] = `${splitDI[0]}/lib/${splitDI[3]}`;
 });
-
-console.log(externals);
-
-// Load library DI
-const DI = Object.keys(componentsFile).map(value => {  
-  return path.resolve(__dirname, `../${componentsFile[value]}`);
-});
-
-console.log(DI);
-
-
-// externals["vacalians-ui/src/packages/options/index.js"] = 'vacalians-ui/lib/options';
 
 const plugins = [
   vue({
     css: true,
     compileTemplate: true,
-    template: { optimizeSSR: true },
+    template: { optimizeSSR: true }
   }),
   babel({
-    exclude: 'node_modules/**',
+    exclude: 'node_modules/**'
   }),
   alias({
-    'vacalians-ui': path.resolve(__dirname, '../'),
-  }),
+    'vacalians-ui': path.resolve(__dirname, '../')
+  })
 ];
 
 const config = [
@@ -46,18 +37,18 @@ const config = [
     output: {
       file: 'lib/lib.common.js',
       format: 'cjs',
-      name: 'vacaliansUi',
+      name: 'vacaliansUi'
     },
-    plugins,
+    plugins
   },
   {
     input: 'src/packages/options/index.js',
     output: {
       file: 'lib/options.js',
       format: 'cjs',
-      name: 'Options',      
-    },    
-    plugins,
+      name: 'Options'
+    },
+    plugins
   },
   {
     input: 'src/packages/counter/index.js',
@@ -66,9 +57,10 @@ const config = [
       format: 'cjs',
       name: 'Counter',
       interop: false,
+      paths: DIObj
     },
     external: DI,
-    plugins,
+    plugins
   },
   {
     input: 'src/packages/helloworld/index.js',
@@ -77,10 +69,11 @@ const config = [
       format: 'cjs',
       name: 'HelloWorld',
       interop: false,
+      paths: DIObj
     },
-    external: externals,
-    plugins,
-  },
+    external: DI,
+    plugins
+  }
 ];
 
 // Only minify browser (iife) version
