@@ -4,8 +4,8 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        'vacalians-ui': path.resolve(__dirname),
-      },
-    },
-  },
+        'vue-library': path.resolve(__dirname)
+      }
+    }
+  }
 };

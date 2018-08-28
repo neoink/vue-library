@@ -1,5 +1,5 @@
 {
-  "options": "vacalians-ui/src/packages/options/index.js",
-  "counter": "vacalians-ui/src/packages/counter/index.js",
-  "hello-world": "vacalians-ui/src/packages/helloworld/index.js"
+  "options": "vue-library/src/packages/options/index.js",
+  "counter": "vue-library/src/packages/counter/index.js",
+  "hello-world": "vue-library/src/packages/helloworld/index.js"
 }

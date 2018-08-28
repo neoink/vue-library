@@ -24,7 +24,7 @@ const plugins = [
     exclude: 'node_modules/**'
   }),
   alias({
-    'vacalians-ui': path.resolve(__dirname, '../')
+    'vue-library': path.resolve(__dirname, '../')
   }),
   progress()
 ];
@@ -36,14 +36,14 @@ const rollupConf = [
     output: {
       file: 'lib/lib.common.js',
       format: 'cjs',
-      name: 'vacaliansUi'
+      name: 'vueLibrary'
     },
     plugins
   }
 ];
 
 // Match DI and replace require directory to "lib" directory entry point
-const re = /^vacalians-ui\/src\/packages\/([a-z]+\/)?([a-z]+\/)([a-z].*js)$/;
+const re = /^vue-library\/src\/packages\/([a-z]+\/)?([a-z]+\/)([a-z].*js)$/;
 const DI = Object.keys(componentsFile).map(value => componentsFile[value]);
 const DIObj = {};
 

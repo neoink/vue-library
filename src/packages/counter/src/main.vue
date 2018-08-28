@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import options from 'vacalians-ui/src/packages/options/index.js';
+import options from 'vue-library/src/packages/options/index.js';
 
 export default {
   name: 'Counter', // vue component name

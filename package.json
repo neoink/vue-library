@@ -1,6 +1,6 @@
 {
-  "name": "@vacalians/test",
-  "version": "0.1.2",
+  "name": "vue-library",
+  "version": "0.1.1",
   "description": "",
   "license": "MIT",
   "main": "lib/lib.common.js",

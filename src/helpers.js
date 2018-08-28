@@ -5,10 +5,10 @@ export const pascalify = str => {
 
 export const componentConf = (directory, name) => {
   const cmpName = pascalify(name);
-  const inputFile = directory[0].replace('vacalians-ui/', '');
+  const inputFile = directory[0].replace('vue-library/', '');
   const outputFile = `lib/${name}.js`;
 
-  let pathRewrite = 'vacalians-ui/lib/';
+  let pathRewrite = 'vue-library/lib/';
 
   if (typeof directory[1] === 'undefined') {
     pathRewrite += directory[2].replace('/', '');
