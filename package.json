@@ -28,5 +28,6 @@
     "rollup-plugin-vue": "^3.0.0",
     "vue": "^2.5.16",
     "vue-template-compiler": "^2.5.16"
-  }
+  },
+  "homepage": "https://github.com/neoink/vue-library"
 }
