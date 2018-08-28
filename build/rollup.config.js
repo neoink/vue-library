@@ -8,7 +8,7 @@ import minimist from 'minimist';
 import progress from 'rollup-plugin-progress';
 
 // Helpers
-import { componentPath } from './../src/helpers';
+import { componentConf } from './../src/helpers';
 
 const argv = minimist(process.argv.slice(2)); // Get cli arguments
 const componentsFile = require('./../components.json'); // Load libraries DI
@@ -29,17 +29,8 @@ const plugins = [
   progress()
 ];
 
-// Match DI and replace require directory to "lib" directory entry point
-const re = /^(vacalians-ui\/src\/packages\/)([a-z]+(.*)\/)([a-z].*js)$/;
-const DI = Object.keys(componentsFile).map(value => componentsFile[value]);
-const DIObj = {};
-
-Object.keys(componentsFile).forEach(value => {
-  const result = componentsFile[value].match(re);
-  DIObj[componentsFile[value]] = componentPath(result);
-});
-
-const config = [
+// Rollup config
+const rollupConf = [
   {
     input: 'src/index.js',
     output: {
@@ -48,41 +39,37 @@ const config = [
       name: 'vacaliansUi'
     },
     plugins
-  },
-  {
-    input: 'src/packages/options/index.js',
-    output: {
-      file: 'lib/options.js',
-      format: 'cjs',
-      name: 'Options'
-    },
-    plugins
-  },
-  {
-    input: 'src/packages/counter/index.js',
-    output: {
-      file: 'lib/counter.js',
-      format: 'cjs',
-      name: 'Counter',
-      interop: false,
-      paths: DIObj
-    },
-    external: DI,
-    plugins
-  },
-  {
-    input: 'src/packages/helloworld/index.js',
-    output: {
-      file: 'lib/hello-world.js',
-      format: 'cjs',
-      name: 'HelloWorld',
-      interop: false,
-      paths: DIObj
-    },
-    external: DI,
-    plugins
   }
 ];
+
+// Match DI and replace require directory to "lib" directory entry point
+const re = /^vacalians-ui\/src\/packages\/([a-z]+\/)?([a-z]+\/)([a-z].*js)$/;
+const DI = Object.keys(componentsFile).map(value => componentsFile[value]);
+const DIObj = {};
+
+Object.keys(componentsFile).forEach(value => {
+  const result = componentsFile[value].match(re);
+  const cmpConfig = componentConf(result, value);
+
+  // Define alias
+  DIObj[componentsFile[value]] = cmpConfig.pathRewrite;
+
+  // Push component config to global config
+  rollupConf.push({
+    input: cmpConfig.inputFile,
+    output: {
+      file: cmpConfig.outputFile,
+      format: 'cjs',
+      name: cmpConfig.cmpName,
+      interop: false,
+      paths: DIObj
+    },
+    external: DI,
+    plugins
+  });
+});
+
+const config = rollupConf;
 
 // Only minify browser (iife) version
 if (argv.format === 'iife') {
