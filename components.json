@@ -1,4 +1,1 @@
-{
-  "counter": "vue-library/packages/counter/index.js",
-  "hello-world": "vue-library/packages/helloworld/index.js"
-}
+{ "counter": "vue-library/packages/counter/index.js" }

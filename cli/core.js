@@ -1,9 +1,12 @@
+// External dependencies
 const fs = require('fs');
 const { join, sep } = require('path');
 const handlebars = require('handlebars');
 const chalk = require('chalk');
 const { promisify } = require('util');
-const { ensureDirectoryExists } = require('./helpers');
+
+// Dependencies
+const { ensureDirectoryExists, pascalify } = require('./../helpers/tools');
 
 // Promisify fs functions
 const readFile = promisify(fs.readFile);
@@ -13,16 +16,15 @@ const lstat = promisify(fs.lstat);
 
 // Handlebars Helpers
 handlebars.registerHelper('raw-helper', options => options.fn());
+handlebars.registerHelper('pascalify', name => pascalify(name));
 
 const createFile = async (file, from, to, data) => {
-  let currentPath;
+  let currentPath = join(to, file);
 
   if (~to.indexOf('packages')) {
     const directoryPath = to.replace('packages', '');
-    currentPath = join(data.componentName, directoryPath, file);
+    currentPath = join('packages', data.componentName, directoryPath, file);
   }
-
-  console.log({ currentPath });
 
   const source = await readFile(join(from, file), 'utf-8');
 
@@ -30,8 +32,8 @@ const createFile = async (file, from, to, data) => {
   const template = handlebars.compile(source);
   const newTemplate = template(data);
 
-  //   ensureDirectoryExists(currentPath, file);
-  //   await writeFile(currentPath, newTemplate);
+  ensureDirectoryExists(currentPath, file);
+  await writeFile(currentPath, newTemplate);
 
   return currentPath;
 };
@@ -58,7 +60,7 @@ core.registryComponent = async answers => {
     answers.componentName
   }/index.js`;
 
-  //   await writeFile('components.json', JSON.stringify(json));
+  await writeFile('components.json', JSON.stringify(json));
 };
 
 core.generateTemplate = (data, directory, to = null) => {

@@ -5,10 +5,10 @@ import uglify from 'rollup-plugin-uglify-es';
 import babel from 'rollup-plugin-babel';
 import alias from 'rollup-plugin-alias';
 import minimist from 'minimist';
-import progress from 'rollup-plugin-progress';
+import filesize from 'rollup-plugin-filesize';
 
 // Helpers
-import { componentConf } from './../src/helpers';
+const { componentConf } = require('./../helpers/tools');
 
 const argv = minimist(process.argv.slice(2)); // Get cli arguments
 const componentsFile = require('./../components.json'); // Load libraries DI
@@ -26,7 +26,7 @@ const plugins = [
   alias({
     'vue-library': path.resolve(__dirname, '../')
   }),
-  progress()
+  filesize()
 ];
 
 // Rollup config

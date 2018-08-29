@@ -1,10 +1,8 @@
 // Import vue component
 import Counter from './../packages/counter/src/main.vue';
-import HelloWorld from './../packages/helloworld/src/main.vue';
 
 const components = {
-  Counter,
-  HelloWorld
+  Counter
 };
 
 // install function executed by Vue.use()
@@ -20,10 +18,9 @@ export function install(Vue) {
 if (typeof window !== 'undefined' && window.Vue) install(window.Vue);
 
 module.exports = {
-  version = '0.1.0',
+  version: '0.1.1',
   install,
-  Counter,
-  HelloWorld
+  Counter
 };
 
 module.exports.default = module.exports;
