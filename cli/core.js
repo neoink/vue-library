@@ -5,8 +5,6 @@ const chalk = require('chalk');
 const { promisify } = require('util');
 const { ensureDirectoryExists } = require('./helpers');
 
-// const { ensureDirectoryExists } = require('./helpers');
-
 // Promisify fs functions
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
@@ -17,11 +15,14 @@ const lstat = promisify(fs.lstat);
 handlebars.registerHelper('raw-helper', options => options.fn());
 
 const createFile = async (file, from, to, data) => {
-  let currentPath = join(data.savePath, file);
+  let currentPath;
 
-  if (typeof to !== 'undefined') {
-    currentPath = join(data.savePath, to, file);
+  if (~to.indexOf('packages')) {
+    const directoryPath = to.replace('packages', '');
+    currentPath = join(data.componentName, directoryPath, file);
   }
+
+  console.log({ currentPath });
 
   const source = await readFile(join(from, file), 'utf-8');
 
@@ -29,8 +30,8 @@ const createFile = async (file, from, to, data) => {
   const template = handlebars.compile(source);
   const newTemplate = template(data);
 
-  ensureDirectoryExists(currentPath, file);
-  await writeFile(currentPath, newTemplate);
+  //   ensureDirectoryExists(currentPath, file);
+  //   await writeFile(currentPath, newTemplate);
 
   return currentPath;
 };
@@ -40,7 +41,7 @@ const core = {};
 core.registryComponent = async answers => {
   // Reference component into json
   const componentFile = await readFile(
-    join(__dirname + '/../components.json'),
+    join(`${__dirname}${sep}..${sep}components.json`),
     'utf-8'
   );
   const json = JSON.parse(componentFile);
@@ -57,7 +58,7 @@ core.registryComponent = async answers => {
     answers.componentName
   }/index.js`;
 
-  await writeFile('components.json', JSON.stringify(json));
+  //   await writeFile('components.json', JSON.stringify(json));
 };
 
 core.generateTemplate = (data, directory, to = null) => {
@@ -74,13 +75,12 @@ core.generateTemplate = (data, directory, to = null) => {
         const isDirectory = stats.isDirectory();
 
         if (isDirectory) {
-          // If directory => recurcise
+          // Directory => recurcise
           let cacheDirectory = currentPath.split(`templates${sep}`)[1];
           await core.generateTemplate(data, currentPath, cacheDirectory);
         } else {
-          console.log({ currentItem, directory, to, data });
-          // else remplace var with Handlebars and write directories/files
-          //   await createFile(currentItem, directory, to, data);
+          // Remplace var with Handlebars and write directories/files
+          await createFile(currentItem, directory, to, data);
         }
       }
 

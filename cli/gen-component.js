@@ -3,6 +3,7 @@ const fs = require('fs');
 const { join, sep } = require('path');
 const figlet = require('figlet');
 const chalk = require('chalk');
+const ora = require('ora');
 const inquirer = require('inquirer');
 const core = require('./core');
 
@@ -43,5 +44,6 @@ inquirer
     await core.registryComponent(answers);
     console.log(chalk.green('✔️  component registred'));
 
+    console.log('🚀  Generating files');
     await core.generateTemplate(answers, initPath);
   });
