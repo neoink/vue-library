@@ -43,7 +43,7 @@ const rollupConf = [
 ];
 
 // Match DI and replace require directory to "lib" directory entry point
-const re = /^vue-library\/src\/packages\/([a-z]+\/)?([a-z]+\/)([a-z].*js)$/;
+const re = /^vue-library\/packages\/([a-z]+\/)?([a-z]+\/)([a-z].*js)$/;
 const DI = Object.keys(componentsFile).map(value => componentsFile[value]);
 const DIObj = {};
 

@@ -9,9 +9,16 @@
   },
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "rollup --config build/rollup.config.js"
+    "build": "rollup --config build/rollup.config.js",
+    "gen": "node ./cli/gen-component.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "figlet": "^1.2.0",
+    "handlebars": "^4.0.11",
+    "inquirer": "^6.1.0",
+    "ora": "^3.0.0"
+  },
   "devDependencies": {
     "@vue/cli-service": "^3.0.0",
     "babel-core": "^6.26.3",

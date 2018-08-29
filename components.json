@@ -1,5 +1,1 @@
-{
-  "options": "vue-library/src/packages/options/index.js",
-  "counter": "vue-library/src/packages/counter/index.js",
-  "hello-world": "vue-library/src/packages/helloworld/index.js"
-}
+{"counter":"vue-library/packages/counter/index.js","hello-world":"vue-library/packages/helloworld/index.js","test":"vue-library/packages/test/index.js","test2":"vue-library/packages/test2/index.js"}

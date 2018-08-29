@@ -8,13 +8,10 @@
 </template>
 
 <script>
-import options from 'vue-library/src/packages/options/index.js';
-
 export default {
   name: 'Counter', // vue component name
   data() {
     return {
-      test: options,
       counter: 5,
       initCounter: 5
     };
