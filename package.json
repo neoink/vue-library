@@ -1,12 +1,9 @@
 {
   "name": "vue-library",
   "version": "0.1.1",
-  "description": "",
+  "description": "Create your own library for vue.js with rollup + babel",
   "license": "MIT",
   "main": "lib/lib.common.js",
-  "browser": {
-    "./sfc": "src/test.vue"
-  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "rollup --config build/rollup.config.js",

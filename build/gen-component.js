@@ -10,7 +10,7 @@ const inquirer = require('inquirer');
 const core = require('./../cli/core');
 const { pascalify } = require('./../helpers/tools');
 const componentsFile = require('./../components.json'); // Load libraries DI
-const { version } = require('./../package.json');
+const { version, description } = require('./../package.json');
 
 const initPath = join(`${__dirname}${sep}..${sep}templates`);
 
@@ -31,9 +31,8 @@ console.log(
   )
 );
 
-console.log(
-  chalk.green('Create your own library for vue.js with rollup + babel')
-);
+console.log(chalk.green(`version : ${version}`));
+console.log(chalk.green(description));
 console.log('');
 console.log('');
 
