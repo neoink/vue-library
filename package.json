@@ -7,7 +7,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "rollup --config build/rollup.config.js",
-    "generator": "node ./build/gen-component.js"
+    "generate": "node ./build/gen-component.js"
   },
   "dependencies": {
     "chalk": "^2.4.1",
