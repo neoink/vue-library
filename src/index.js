@@ -1,8 +1,8 @@
 // Import vue component
-import Counter from './../packages/counter/src/main.vue';
+import Counter from './../packages/counter/src/main.vue';  
 
 const components = {
-  Counter
+  Counter,
 };
 
 // install function executed by Vue.use()
@@ -20,7 +20,7 @@ if (typeof window !== 'undefined' && window.Vue) install(window.Vue);
 module.exports = {
   version: '0.1.4',
   install,
-  Counter
+  Counter,
 };
 
 module.exports.default = module.exports;

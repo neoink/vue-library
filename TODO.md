@@ -2,7 +2,7 @@
 
 ## Required
 
-- Delete components via CLI
+- ~~Delete components via CLI~~
 - Add component's type (JS / VUE)
 - Add sub-directory for component via CLI
 - Add global options shared between the library

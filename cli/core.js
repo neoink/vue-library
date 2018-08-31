@@ -22,8 +22,6 @@ handlebars.registerHelper('pascalify', name => pascalify(name));
 const core = {};
 
 core.createFile = async (file, from, to, data) => {
-  console.log({ file, from, to, data });
-
   let currentPath = join(to, file);
 
   if (~to.indexOf('packages')) {
@@ -63,12 +61,12 @@ core.registryHandler = async data => {
     }/index.js`;
   } else if (data.action === 'delete') {
     // If component not exist => exit
-    if (typeof json[data.componentNameDel] === 'undefined') {
-      console.log(chalk.red(`Component "${data.componentNameDel}" not exist`));
+    if (typeof json[data.componentName] === 'undefined') {
+      console.log(chalk.red(`Component "${data.componentName}" not exist`));
       process.exit(1);
     }
 
-    delete json[data.componentNameDel];
+    delete json[data.componentName];
   }
 
   await writeFile('components.json', JSON.stringify(json, null, '\t'));
@@ -105,9 +103,7 @@ core.generateTemplate = (data, directory, to = null) => {
 };
 
 core.removeFiles = data => {
-  rimraf(`packages/${data.componentNameDel}`, () => {
-    console.log('directory removed');
-  });
+  rimraf(`packages/${data.componentName}`, () => true);
 };
 
 module.exports = core;

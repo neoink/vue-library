@@ -27,7 +27,7 @@ module.exports = [
       }
     },
     type: 'list',
-    name: 'componentNameDel',
+    name: 'componentName',
     message: 'What is the component you want to delete ?',
     choices: () => {
       const list = Object.keys(componentsFile).map(keys => {
@@ -39,15 +39,17 @@ module.exports = [
   },
   {
     when: answer => {
-      if (typeof answer.componentNameDel !== 'undefined') {
+      if (
+        answer.action === 'delete' &&
+        typeof answer.componentName !== 'undefined'
+      ) {
         return true;
       }
     },
-    type: 'list',
+    type: 'confirm',
     name: 'deleteConfirmation',
     message: answer => {
-      return `Are you sure to delete "${answer.componentNameDel}" component ?`;
-    },
-    choices: [{ name: 'No', value: 'no' }, { name: 'Yes', value: 'yes' }]
+      return `Are you sure to delete "${answer.componentName}" component ?`;
+    }
   }
 ];

@@ -45,13 +45,12 @@ inquirer.prompt(questions).then(async data => {
   });
 
   data.list = indexVar;
-  data.componentNamePascal = pascalify(
-    data.componentName || data.componentNameDel
-  );
+  data.componentNamePascal = pascalify(data.componentName);
   data.version = version;
 
   // ** Add component **
   if (data.action === 'add') {
+    // Push component into list
     data.list.push(data.componentName);
 
     // Editing registry
@@ -68,18 +67,18 @@ inquirer.prompt(questions).then(async data => {
   }
   // ** Delete component **
   else if (data.action === 'delete') {
-    if (data.deleteConfirmation === 'no') {
+    if (!data.deleteConfirmation) {
       console.log(chalk.green('Deleting component aborted'));
       process.exit(0);
     }
 
-    delete data.list[data.componentName];
+    // Remove component into list
+    const index = data.list.indexOf(data.componentName);
+    if (~index) data.list.splice(index, 1);
 
     // Editing registry
     console.log(
-      `✒️  Remove ${chalk.yellow(
-        data.componentNameDel
-      )} component's registry in`,
+      `✒️  Remove ${chalk.yellow(data.componentName)} component's registry in`,
       chalk.yellow('components.json')
     );
     spinner = ora('Editing Registry...').start();
@@ -90,7 +89,7 @@ inquirer.prompt(questions).then(async data => {
     console.log('✒️  Remove files');
     spinner = ora('Files removing...').start();
     await core.removeFiles(data);
-    await core.generateTemplate(data, join(initPath, 'src'));
+    await core.generateTemplate(data, join(initPath, 'src'), 'src');
     spinner.succeed(chalk.green('Files deleted'));
   }
 });
