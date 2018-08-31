@@ -7,6 +7,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import cleanup from 'rollup-plugin-cleanup';
 import sourcemaps from 'rollup-plugin-sourcemaps';
+import visualizer from 'rollup-plugin-visualizer';
 
 export default [
   commonjs({
@@ -33,5 +34,9 @@ export default [
     extensions: ['.js', '.vue']
   }),
   sourcemaps(),
-  filesize()
+  filesize(),
+  visualizer({
+    sourcemap: true,
+    open: true
+  })
 ];

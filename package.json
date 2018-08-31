@@ -1,9 +1,14 @@
 {
   "name": "vue-library",
-  "version": "0.1.4",
+  "version": "0.1.5",
+  "author": "Laurent Goutagny <laurent@neoink.fr>",
   "description": "Create your own library for vue.js with rollup + babel",
   "license": "MIT",
   "main": "lib/lib.common.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:neoink/vue-library.git"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "rollup --c build/rollup.config.js",
@@ -26,7 +31,7 @@
     "minimist": "^1.2.0",
     "ora": "^3.0.0",
     "rimraf": "^2.6.2",
-    "rollup": "^0.57.1",
+    "rollup": "^0.65.0",
     "rollup-plugin-alias": "^1.4.0",
     "rollup-plugin-babel": "^3.0.7",
     "rollup-plugin-cleaner": "^0.2.0",
@@ -35,9 +40,9 @@
     "rollup-plugin-filesize": "^4.0.1",
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-sourcemaps": "^0.4.2",
+    "rollup-plugin-visualizer": "^0.9.0",
     "rollup-plugin-vue": "^3.0.0",
     "vue": "^2.5.16",
     "vue-template-compiler": "^2.5.16"
-  },
-  "homepage": "https://github.com/neoink/vue-library"
+  }
 }
