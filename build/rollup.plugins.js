@@ -6,6 +6,7 @@ import filesize from 'rollup-plugin-filesize';
 import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import cleanup from 'rollup-plugin-cleanup';
+import sourcemaps from 'rollup-plugin-sourcemaps';
 
 export default [
   commonjs({
@@ -31,5 +32,6 @@ export default [
     comments: ['eslint', /^\*-/],
     extensions: ['.js', '.vue']
   }),
+  sourcemaps(),
   filesize()
 ];

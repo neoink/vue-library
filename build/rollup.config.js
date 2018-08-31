@@ -1,8 +1,7 @@
 // Libraries
-import path from 'path';
 import merge from 'deepmerge';
-import cleaner from 'rollup-plugin-cleaner';
 import minimist from 'minimist';
+import cleaner from 'rollup-plugin-cleaner';
 
 // Import Plugins config
 import plugins from './rollup.plugins';
@@ -13,7 +12,7 @@ const { componentConf } = require('./../helpers/tools');
 const argv = minimist(process.argv.slice(2)); // Get cli arguments
 const componentsFile = require('./../components.json'); // Load libraries DI
 
-// Delete "lib" directory before generate library
+// Add specifics plugins for main bundle
 const mainPlugins = merge(
   [
     cleaner({
@@ -30,7 +29,8 @@ const rollupConf = [
     output: {
       file: 'lib/lib.common.js',
       format: 'cjs',
-      name: 'vueLibrary'
+      name: 'vueLibrary',
+      sourcemap: true
     },
     plugins: mainPlugins
   }
@@ -55,6 +55,7 @@ Object.keys(componentsFile).forEach(value => {
       file: cmpConfig.outputFile,
       format: 'cjs',
       name: cmpConfig.cmpName,
+      sourcemap: true,
       interop: false,
       paths: DIObj
     },
