@@ -1,11 +1,11 @@
 // Libraries
 import path from 'path';
-import vue from 'rollup-plugin-vue';
-import uglify from 'rollup-plugin-uglify-es';
-import babel from 'rollup-plugin-babel';
-import alias from 'rollup-plugin-alias';
+import merge from 'deepmerge';
+import cleaner from 'rollup-plugin-cleaner';
 import minimist from 'minimist';
-import filesize from 'rollup-plugin-filesize';
+
+// Import Plugins config
+import plugins from './rollup.plugins';
 
 // Helpers
 const { componentConf } = require('./../helpers/tools');
@@ -13,21 +13,15 @@ const { componentConf } = require('./../helpers/tools');
 const argv = minimist(process.argv.slice(2)); // Get cli arguments
 const componentsFile = require('./../components.json'); // Load libraries DI
 
-// Rollup Plugins
-const plugins = [
-  vue({
-    css: true,
-    compileTemplate: true,
-    template: { optimizeSSR: true }
-  }),
-  babel({
-    exclude: 'node_modules/**'
-  }),
-  alias({
-    'vue-library': path.resolve(__dirname, '../')
-  }),
-  filesize()
-];
+// Delete "lib" directory before generate library
+const mainPlugins = merge(
+  [
+    cleaner({
+      targets: ['lib']
+    })
+  ],
+  plugins
+);
 
 // Rollup config
 const rollupConf = [
@@ -38,7 +32,7 @@ const rollupConf = [
       format: 'cjs',
       name: 'vueLibrary'
     },
-    plugins
+    plugins: mainPlugins
   }
 ];
 
@@ -70,10 +64,5 @@ Object.keys(componentsFile).forEach(value => {
 });
 
 const config = rollupConf;
-
-// Only minify browser (iife) version
-if (argv.format === 'iife') {
-  config.plugins.push(uglify());
-}
 
 export default config;

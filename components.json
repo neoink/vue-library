@@ -1,1 +1,3 @@
-{ "counter": "vue-library/packages/counter/index.js" }
+{
+	"counter": "vue-library/packages/counter/index.js"
+}

@@ -1,15 +1,15 @@
 <template>
     <div>
-        <Counter />
+        <inputNb />
     </div>
 </template>
 
 <script>
-import Counter from './packages/counter/src/main.vue';
+import inputNb from './../packages/input-number/src/main.vue';
 
 export default {
   components: {
-    Counter
+    inputNb
   }
 };
 </script>
