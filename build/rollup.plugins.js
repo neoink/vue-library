@@ -7,7 +7,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import cleanup from 'rollup-plugin-cleanup';
 import sourcemaps from 'rollup-plugin-sourcemaps';
-import visualizer from 'rollup-plugin-visualizer';
+import postcss from 'rollup-plugin-postcss';
 
 export default [
   commonjs({
@@ -18,9 +18,20 @@ export default [
     jsnext: true,
     main: true
   }),
+  postcss({
+    extract: 'bundle.css'
+  }),
   vue({
-    css: true,
-    compileTemplate: true,
+    // cssModules: {
+    //   generateScopedName: '[name]__[local]-[hash:base64:4]'
+    // },
+    // postcss: {
+    //   plugins: [require('postcss-nested')]
+    // },
+    // css: styles => {
+    //   console.log(styles);
+    // },
+    css: false,
     template: { optimizeSSR: true }
   }),
   babel({
@@ -34,9 +45,5 @@ export default [
     extensions: ['.js', '.vue']
   }),
   sourcemaps(),
-  filesize(),
-  visualizer({
-    sourcemap: true,
-    open: true
-  })
+  filesize()
 ];

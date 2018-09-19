@@ -2,6 +2,7 @@
 import merge from 'deepmerge';
 import minimist from 'minimist';
 import cleaner from 'rollup-plugin-cleaner';
+import visualizer from 'rollup-plugin-visualizer';
 
 // Import Plugins config
 import plugins from './rollup.plugins';
@@ -18,6 +19,11 @@ const mainPlugins = merge(
     cleaner({
       targets: ['lib']
     })
+    // visualizer({
+    //   // sourcemap: true,
+    //   open: true,
+    //   title: 'Library visualizer'
+    // })
   ],
   plugins
 );

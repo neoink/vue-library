@@ -19,7 +19,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="postcss" module>
 .test {
   display: block;
   width: 400px;
@@ -28,8 +28,8 @@ export default {
   background: #eaeaea;
   text-align: center;
   padding: 25px;
-}
-.test p {
-  margin: 0 0 1em;
+  p {
+    margin: 0 0 1em;
+  }
 }
 </style>

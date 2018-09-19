@@ -3,8 +3,6 @@
 ## Required
 
 - ~~Delete components via CLI~~
-- Add sub-directory for component via CLI
-- Add component's type (JS / VUE)
 - Add global options shared between the library
 - Manage css library theme and post-processing
 - Manage assets import
