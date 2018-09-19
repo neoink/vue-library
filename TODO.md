@@ -3,7 +3,7 @@
 ## Required
 
 - ~~Delete components via CLI~~
-- Add global options shared between the library
+- Add global options shared between the library (locale)
 - Manage css library theme and post-processing
 - Manage assets import
 - Manage unique internal library shared with multiple components
@@ -22,6 +22,7 @@
 - Suggest a multiple choices of css post-processing via CLI
 - Merge this repository with [vue-sfc-rollup](https://github.com/neoink/vue-sfc-rollup)
 - Add a bundle analyser / dependencies graph
+- Manage (umd, js, etc...) format
 - Add unit test
 - Add eslint
 - Add typeScript

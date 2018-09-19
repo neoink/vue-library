@@ -18,7 +18,7 @@ module.exports = [
     },
     type: 'input',
     name: 'componentName',
-    message: 'What is the kebab-case tag name for your component ?'
+    message: 'What is the tag name for your component ?'
   },
   {
     when: answer => {
@@ -29,6 +29,7 @@ module.exports = [
     type: 'list',
     name: 'componentName',
     message: 'What is the component you want to delete ?',
+    default: false,
     choices: () => {
       const list = Object.keys(componentsFile).map(keys => {
         return keys;

@@ -9,6 +9,12 @@ tools.pascalify = str => {
   return camelized.charAt(0).toUpperCase() + camelized.slice(1);
 };
 
+tools.kebabcase = string =>
+  string
+    .replace(/([a-z])([A-Z])/g, '$1-$2')
+    .replace(/\s+/g, '-')
+    .toLowerCase();
+
 // Helper to ensure directory exists before writing file to it
 tools.ensureDirectoryExists = filePath => {
   const dirname = path.dirname(filePath);

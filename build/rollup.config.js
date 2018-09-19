@@ -19,14 +19,16 @@ const mainPlugins = merge(
     cleaner({
       targets: ['lib']
     })
-    // visualizer({
-    //   // sourcemap: true,
-    //   open: true,
-    //   title: 'Library visualizer'
-    // })
   ],
   plugins
 );
+
+// mainPlugins.push(
+//   visualizer({
+//     open: true
+//     // sourcemap: true
+//   })
+// );
 
 // Rollup config
 const rollupConf = [

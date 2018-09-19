@@ -9,7 +9,7 @@ const inquirer = require('inquirer');
 // Dependencies
 const core = require('./core');
 const questions = require('./questions');
-const { pascalify } = require('./../helpers/tools');
+const { pascalify, kebabcase } = require('./../helpers/tools');
 const componentsFile = require('./../components.json'); // Load libraries DI
 const { version, description } = require('./../package.json');
 
@@ -44,6 +44,7 @@ inquirer.prompt(questions).then(async data => {
     return keys;
   });
 
+  data.componentName = kebabcase(data.componentName);
   data.list = indexVar;
   data.componentNamePascal = pascalify(data.componentName);
   data.version = version;

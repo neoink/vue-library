@@ -1,5 +1,5 @@
 <template>
-    <div class="test">      
+    <div class="test">
         <p>The counter is set to <b>{{counter}}</b>.</p>
         <button @click="counter += 1">Click +1</button>
         <button @click="counter -= 1">Click -1</button>
